@@ -1,31 +1,19 @@
 package com.eder.famtree.rest
 
+import com.eder.famtree.dto.HumanDtoUtils
 import com.eder.famtree.jpa.Human
 import com.eder.famtree.service.HumanService
 import org.springframework.web.bind.annotation.*
-import java.time.LocalDate
 
-@RestController()
+@RestController("/api")
 class HumanRestController(val humanService: HumanService) {
 
-    @GetMapping("/api/all")
-    fun getAllHumans() = humanService.getAllHumans()
+    @GetMapping("/all")
+    fun getAllHumans() = HumanDtoUtils.transformToDtos(humanService.findAllHumans())
 
-    @GetMapping("/api/human")
-    fun getHumanById(@RequestParam(name = "id") id: Int) = humanService.getHumanById(id)
-
-    @GetMapping("/api/testdata")
-    fun getTestdata(): Set<Human> {
-        return setOf(
-            Human(1, "Irmgard Eder", LocalDate.of(1950, 1, 25), null, null, null),
-            Human(2, "Alexandra Kussbauer", LocalDate.of(1970, 1, 1), null, null, null),
-            Human(3, "Michaela Eder", LocalDate.of(1971, 11, 21), null,null, null),
-            Human(4, "Philipp Eder", LocalDate.of(1992, 12, 7), null,null, null),
-            Human(5, "Marlene Winkler",  LocalDate.of(1998,5, 18), null,null, null),
-            Human(6, "Buddy Winkler",  LocalDate.of(2019,1, 1), null,null, null)
-        )
-    }
+    @GetMapping("/human")
+    fun getHumanById(@RequestParam(name = "id") id: Int) = humanService.findHumanById(id)
 
     @PostMapping("/add")
-    fun addHuman(@RequestBody human: Human) = humanService.createHuman(human)
+    fun addHuman(@RequestBody human: Human) = humanService.saveHuman(human)
 }

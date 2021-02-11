@@ -21,12 +21,14 @@ data class Human(
     @Column
     var dateOfDeath : LocalDate?,
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "mother", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "mother", referencedColumnName = "id")
     var mother : Human?,
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "mother", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "father", referencedColumnName = "id")
     var father : Human?,
 
-)
+) {
+    constructor(name: String?, dateOfBirth: LocalDate?, dateOfDeath: LocalDate?, mother: Human?, father: Human?) : this(null, name, dateOfBirth ,dateOfDeath, mother, father)
+}
