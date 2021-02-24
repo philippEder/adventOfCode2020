@@ -5,15 +5,19 @@ import com.eder.famtree.jpa.Human
 import com.eder.famtree.service.HumanService
 import org.springframework.web.bind.annotation.*
 
-@RestController("/api")
+@RestController
 class HumanRestController(val humanService: HumanService) {
 
-    @GetMapping("/all")
+    @GetMapping("/api/treedata")
     fun getAllHumans() = HumanDtoUtils.transformToDtos(humanService.findAllHumans())
 
-    @GetMapping("/human")
+    @GetMapping("/api/human")
     fun getHumanById(@RequestParam(name = "id") id: Int) = humanService.findHumanById(id)
 
-    @PostMapping("/add")
+    @PostMapping("/api/add")
     fun addHuman(@RequestBody human: Human) = humanService.saveHuman(human)
+
+    @GetMapping("/api/generatetestdata")
+    fun generateTestData() = humanService.generateTestdata()
+
 }

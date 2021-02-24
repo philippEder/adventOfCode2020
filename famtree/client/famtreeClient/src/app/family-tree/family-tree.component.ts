@@ -16,7 +16,7 @@ export class FamilyTreeComponent{
     familyDataService.getNodes().subscribe(humans => {
       humans.forEach(human => console.log(human));
     });
-    this.nodes = familyDataService.getTestNodes();
+    this.nodes = familyDataService.getNodes1();
     this.links = familyDataService.getTestLinks();
   }
 
