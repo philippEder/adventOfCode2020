@@ -11,7 +11,7 @@ enum class PassportProperty(val code: String, val validator: (value : String) ->
           }),
     HAIR_COLOR("hcl",      { it.startsWith("#") && it.length == 7 && "[a-z0-9]+".toRegex().matches(it.substringAfter("#")) }),
     EYE_COLOR("ecl",       { validHairColors.contains(it) }),
-    PASSPORT_ID("pid",     { it.startsWith("0") && "[0-9]+".toRegex().matches(it) && it.length == 9 }),
+    PASSPORT_ID("pid",     { "[0-9]+".toRegex().matches(it) && it.length == 9 }),
     COUNTRY_ID("cid",      { true });
 
     companion object {
