@@ -1,7 +1,7 @@
 package com.eder.adventOfCode.day4
 
 
-enum class PassportProperty(val code: String, val validator : (String) -> Boolean) {
+enum class PassportProperty(val code: String, val validate : (String) -> Boolean) {
     BIRTH_YEAR("byr",      { it.length == 4 && it.toInt() >= 1920 && it.toInt() <= 2002 }),
     ISSUE_YEAR("iyr",      { it.length == 4 && it.toInt() >= 2010 && it.toInt() <= 2020 }),
     EXPIRATION_YEAR("eyr", { it.length == 4 && it.toInt() >= 2020 && it.toInt() <= 2030 }),
