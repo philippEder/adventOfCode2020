@@ -14,7 +14,7 @@ class Passport {
     fun isValid() : Boolean = (areAllPropertiesPresent() || isOnlyCountryPropertyMissing()) && allPropertiesAreValid()
 
     private fun allPropertiesAreValid(): Boolean = properties.all { isPropertyValid(it.key, it.value) }
-    private fun isPropertyValid(property: PassportProperty, value: String) = property.validator.invoke(value)
+    private fun isPropertyValid(property: PassportProperty, value: String) = property.validator(value)
     private fun areAllPropertiesPresent() = PassportProperty.values().size == properties.size
     private fun isOnlyCountryPropertyMissing(): Boolean {
         val isMissingOneProperty = (PassportProperty.values().size - properties.size) == 1
